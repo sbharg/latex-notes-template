@@ -1,0 +1,249 @@
+% Required for TeX packages
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[custom shortcuts as a package]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Paper dimensions - A4 vs Letterpaper
+%------------------------------------%
+\DeclareOption{a4}{
+  \PassOptionsToPackage{a4paper, margin=2cm}{geometry}
+}
+\DeclareOption{letter}{
+  \PassOptionsToPackage{letterpaper, margin=1in}{geometry}
+}
+
+\ExecuteOptions{letter}
+\ProcessOptions\relax
+
+% Pdf Packages
+%------------%
+\RequirePackage[utf8]{inputenc}
+\RequirePackage{microtype} 
+\RequirePackage{lmodern}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[english]{babel}
+\RequirePackage{csquotes}
+\DeclareUnicodeCharacter{2212}{-}
+\RequirePackage{comment}
+\RequirePackage[page]{appendix}
+\RequirePackage{lipsum}
+
+\RequirePackage{booktabs}
+\RequirePackage{xspace}
+\RequirePackage{enumitem}
+
+\RequirePackage{geometry}
+
+% --Abstract-----------
+\AtBeginDocument{\def\keywordname{{\bf Keywords:}}}
+\providecommand{\keywords}[1]{\def\and{{\textperiodcentered} }%
+\par\addvspace\baselineskip
+\noindent\keywordname\enspace\ignorespaces#1}%
+
+% --Math Packages----------------
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+\RequirePackage{mathtools}
+\RequirePackage[c2, nocomma]{optidef}
+\RequirePackage{bm}
+\RequirePackage{amsthm}
+\RequirePackage{thmtools}
+
+% Colors + Refs
+%-------------%
+\RequirePackage[dvipsnames]{xcolor}
+\RequirePackage[framemethod=TikZ]{mdframed}
+
+\definecolor{Red}{rgb}{1,0,0}
+\definecolor{Blue}{rgb}{0,0,1}
+\definecolor{linkcolor}{rgb}{0, 0.25, 0.75}
+
+\RequirePackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=linkcolor,
+  citecolor=linkcolor,
+  urlcolor=linkcolor,
+  bookmarksnumbered
+}
+\RequirePackage[nameinlink, capitalize]{cleveref}
+ 
+% Algorithms
+%----------%
+%\RequirePackage{algorithmicx}
+\RequirePackage{algorithm}
+\RequirePackage[beginLComment=//~,endLComment=,beginComment=//~,endComment=]{algpseudocodex}
+
+% Tikz + Graphics
+%---------------%
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.17}
+
+\RequirePackage{graphicx}
+\RequirePackage[labelfont=bf]{caption}
+\RequirePackage{subcaption}
+
+% --Theorem Styling--------------
+\newcommand{\qedsym}{\hfill$\blacksquare$}
+\mdfsetup{skipabove=\topsep,skipbelow=\topsep,rightmargin=0em,innerrightmargin=0em}
+
+%\definecolor[named]{ThmColor}{cmyk}{0.58,0.18,0.00,0.42}
+%\definecolor[named]{ProofColor}{cmyk}{0.22,0.13,0.00,0.47}
+%\definecolor[named]{ProbColor}{cmyk}{0.00,0.77,0.87,0.00}
+%\definecolor[named]{DefColor}{cmyk}{0.56,0.00,0.32,0.33}
+\definecolor[named]{ThmColor}{HTML}{4682B4}
+\definecolor[named]{ProofColor}{HTML}{949698}
+\definecolor[named]{ProbColor}{HTML}{F26035}
+\definecolor[named]{DefColor}{HTML}{507D2A}
+\definecolor[named]{ClaimColor}{HTML}{7977B8}
+\definecolor[named]{ExerciseColor}{HTML}{933D41}
+
+\declaretheoremstyle[
+  headfont=\bfseries, 
+  bodyfont=\normalfont,
+  headpunct= ,
+  postheadspace=\newline,
+  postheadhook={\mbox{}\vskip-1.75ex{\color{DefColor}\hrule height 1pt}\vspace{1ex}\noindent},
+  mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=DefColor, backgroundcolor=DefColor!0,
+			nobreak=false
+		}
+]{def}
+
+\declaretheoremstyle[
+	headfont=\bfseries, 
+  bodyfont=\itshape,
+  headpunct= ,
+  notefont=\sffamily,
+  postheadspace=\newline,
+  postheadhook={\mbox{}\vskip-1.75ex{\color{ProbColor}\hrule height 1pt}\vskip1ex\noindent},
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=ProbColor, backgroundcolor=ProbColor!0,
+			nobreak=false,
+		}
+]{problem}
+
+\declaretheoremstyle[
+	headfont=\bfseries, 
+  bodyfont=\itshape,
+  headpunct= ,
+  postheadspace=\newline,
+  postfoothook={\mbox{}\vskip-1.75ex{\hrule height 1pt}\vskip1ex\noindent}
+  %postheadhook={\mbox{}\vskip-1.75ex{\color{ExerciseColor}\hrule height 1pt}\vskip1ex\noindent},
+	%mdframed={
+	%		linewidth=2pt,
+	%		rightline=false, topline=false, bottomline=false,
+	%		linecolor=ExerciseColor, backgroundcolor=ExerciseColor!0,
+	%		nobreak=false,
+  %    skipbelow=0
+	%	}
+]{exercise}
+
+\declaretheoremstyle[
+  headfont=\itshape,
+  bodyfont=\normalfont,
+  notefont=\itshape, notebraces={}{},
+  qed=\qedsym,
+  postheadspace=\newline,
+  preheadhook={\vspace{-\topsep}},
+]{solution}
+
+\declaretheoremstyle[
+  bodyfont=\itshape,
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=ThmColor, backgroundcolor=ThmColor!7,
+			nobreak=false,
+      innerrightmargin=10pt,
+		}
+]{thms}
+
+\declaretheoremstyle[
+  bodyfont=\itshape,
+	mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=ClaimColor, backgroundcolor=ClaimColor!7,
+			nobreak=false,
+      innerrightmargin=10pt,
+		}
+]{claims}
+ 
+\declaretheoremstyle[
+  headfont=\itshape,
+  bodyfont=\normalfont,
+  notefont=\itshape, notebraces={}{},
+  qed=\qedsym,
+  preheadhook={\vspace{-\topsep}},
+  mdframed={
+			linewidth=2pt,
+			rightline=false, topline=false, bottomline=false,
+			linecolor=ProofColor, backgroundcolor=ProofColor!0,
+			nobreak=false,
+      %innertopmargin=0em
+		}
+]{proof}
+
+\declaretheorem[style=thms]{theorem, lemma, corollary}
+\declaretheorem[style=claims]{claim, conjecture, proposition, observation, remark}
+\declaretheorem[style=problem]{problem}
+\declaretheorem[style=def]{definition, property}
+\declaretheorem[style=exercise]{exercise}
+
+\let\proof\relax
+\declaretheorem[numbered=no, style=proof]{proof}
+\declaretheorem[numbered=no, style=proof, name=Proof Sketch]{proofsketch}
+\declaretheorem[numbered=no, style=solution, name=Solution]{solution}
+
+\newlist{proplist}{enumerate}{1} % should only occur inside definition env.
+\setlist[proplist]{label=\arabic*),ref=\theproperty.\arabic*}
+\setlist[enumerate,1]{label={\arabic*)}}
+
+\newlist{casesp}{enumerate}{3} %% new list environment based on enumerate with a max depth of 3
+%% Setting parameters for this list environment
+\setlist[casesp]{align=left, %% alignment of labels
+                 listparindent=\parindent, %% same indentation as in normal text
+                 parsep=\parskip, %% same parskip as in normal text
+                 font=\normalfont\bfseries, %% font used for labels
+                 leftmargin=0pt, %% total amount by which text is indented
+                 labelwidth=0pt, %% width of labels (=how much they stick out on the left because align=left)
+                 itemindent=.4em,labelsep=.4em, %% space between label and text
+%                 topsep=??, %% vertical space above and below list
+                 partopsep=0pt, %% extra vertical space above and below if separate paragraph
+%                 itemsep=??, %% vertical space after each item
+                 }
+%% Setting labels (and reference formats) for each depth separately
+%% N.B. ref is needed even if you don't want to refer to cases because \thecasespi(i) uses it
+\setlist[casesp,1]{label=Case~\arabic*:,ref=\arabic*}
+\setlist[casesp,2]{label=Case~\thecasespi.\roman*:,ref=\thecasespi.\roman*}
+\setlist[casesp,3]{label=Case~\thecasespii.\alph*:,ref=\thecasespii.\alph*}
+
+% Cleverref
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{claim}{Claim}{Claims}
+\crefname{observation}{Observation}{Observations}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{property}{Property}{Properties}
+\crefname{proplisti}{Property}{Properties}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{remark}{Remark}{Remarks}
+\crefname{invariant}{Invariant}{Invariants}
+\crefname{problem}{Problem}{Problems}
+\crefname{definition}{Definition}{Definitions}
+\crefname{algorithm}{Algorithm}{Algorithms}
+\crefname{lp}{}{}
+\crefname{figure}{Figure}{Figures}
+
+\endinput

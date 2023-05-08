@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Custom commands -- Some math symbols and math shortcuts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --Shortcuts for left/right-----
+\newcommand{\lrp}[1]{\left( #1 \right)}
+\newcommand{\lrb}[1]{\left[ #1 \right]}
+\newcommand{\lrc}[1]{\left\{ #1 \right\}}
+\newcommand{\lrv}[1]{\left\langle #1 \right\rangle}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\ceil}[1]{{\lceil {#1} \rceil}}
+\newcommand{\floor}[1]{{\lfloor {#1} \rfloor}}
+
+% --Commonly-used sets-----------
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\powerset}{\ensuremath{\mathcal{P}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+% --Probability------------------
+\DeclareMathOperator*{\E}{\mathbb{E}}
+\newcommand{\EX}[1]{\ensuremath{\E \lrb{#1}}}
+\newcommand{\PR}[1]{\ensuremath{\Pr \lrb{#1}}}
+
+% --Complexity-------------------
+\newcommand{\NP}{\textsf{NP}}
+\newcommand{\NPH}{\textsf{NP-Hard}}
+\newcommand{\NPC}{\textsf{NP-Complete}}
+\newcommand{\ksum}{\textsf{$k$-Sum}}
+\newcommand{\eqcarpart}{\textsf{Equal Cardinality Partition}}
+\newcommand{\knapsack}{\textsf{Knapsack}}
+\newcommand{\subsetsum}{\textsf{Subset Sum}}
+
+\newcommand{\bigO}[2][]{\ensuremath{O_{#1}(#2)}}
+\newcommand{\bigOlog}[2][]{\ensuremath{\tilde{O_{#1}}(#2)}}
+\newcommand{\littleO}[2][]{\ensuremath{o_{#1}(#2)}}
+
+\newcommand{\bigOmega}[2][]{\ensuremath{\Omega_{#1}(#2)}}
+\newcommand{\littleOmega}[2][]{\ensuremath{\omega_{#1}(#2)}}
+
+\newcommand{\bigTheta}[2][]{\ensuremath{\Theta_{#1}(#2)}}
+\newcommand{\polyreduce}{\ensuremath{\leq_p}}
+
+% --Custom-----------------------
+\newcommand{\f}[2][f]{\ensuremath{#1 \! \lrp{#2}}}
+\newcommand{\func}[2]{\f[#1]{#2}}
+
+% --Graphs-----------------------
+\newcommand{\degree}[2][]{\f[\mathrm{deg}_{#1}]{#2}}
+\newcommand{\cut}[2][]{\f[\delta_{#1}]{#2}}
+
+% --DiscreteOpt------------------
+\newcommand{\OPT}{\ensuremath{\mathrm{OPT}}}
+\newcommand{\poly}[1]{\f[\mathrm{poly}]{#1}}
+\newcommand{\polylog}[1]{\f[\mathrm{polylog}]{#1}}
+
+% --More sets--------------------
+\newcommand{\nonneg}[1]{\lrb{#1}^+}
+\def\sse{\subseteq}
+\def\sm{\setminus}
+\def\xbar{\bar{x}}
+\def\calZ{\mathcal{Z}}
+\def\calH{\mathcal{H}}
+\def\calV{\mathcal{V}}
+\def\calE{\mathcal{E}}
+\def\calQ{\mathcal{Q}}
+\def\calM{\mathcal{M}}
+\def\calN{\mathcal{N}}
+\def\calG{\mathcal{G}}
+\def\calR{\mathcal{R}}
+\def\calJ{\mathcal{J}}
+\def\calL{\mathcal{L}}
+\def\calP{\mathcal{P}}
+\def\calB{\mathcal{B}}
+\def\calA{\mathcal{A}}
+\def\calC{\mathcal{C}}
+\def\calX{\mathcal{X}}
+\def\calY{\mathcal{Y}}
+\def\calS{\mathcal{S}}
+\def\calT{\mathcal{T}}
+\def\calU{\mathcal{U}}
+\def\calI{\mathcal{I}}
+\def\calF{\mathcal{F}}
+ 
+% --Algorithms-------------------
+\newcommand{\AlgIn}{\Statex \textbf{Input:} }
+\newcommand{\AlgOut}{\Statex \textbf{Output:} }
+\newcommand{\Algreq}{\Statex \textbf{Require:} }
+
+% --Misc-------------------------
+% Usage: \tempnote{author}{note}
+\newcommand{\tempnote}[2]{$\ll${\bf #1: }{\it #2}$\gg${\marginpar{\tiny{{\bf#1}}}}}
+% Usage: \newedit[Optional Tag on Margin]{Comment}
+\newcommand{\newedit}[2][]{\textcolor{OrangeRed}{#2}{\marginpar{\tiny{{\bf \textcolor{OrangeRed}{#1}}}}}}
+\newcommand{\TODO}[1]{\textcolor{OrangeRed}{{\bf TODO:} #1}}
+\newcommand{\NOTE}[1]{\textcolor{OrangeRed}{{\bf NOTE:}} #1}
+\newcommand{\cc}{\textcolor{red}{\bf [citation(s)]}}
+\newcommand{\email}[1]{\textsf{#1}}
+\newcommand{\customcite}[1]{\par \noindent \cite{#1} \citeauthor{#1}, \citetitle{#1}, \citeyear{#1}}
+\newcommand{\defequals}{\overset{\mathrm{def}}{=}}
+\newcommand{\crefdefpart}[2]{%
+    \hyperref[#2]{\namecref{#1}~\labelcref*{#1}.\ref*{#2}}%
+}
+
+\makeatletter
+\newcommand{\leqnomode}{\tagsleft@true}
+\newcommand{\reqnomode}{\tagsleft@false}
+\makeatother
+
+\makeatletter
+\newcommand{\specificthanks}[1]{\@fnsymbol{#1}}% Inserts a specific \thanks symbol
+\makeatother
+
+%\end{comment}
